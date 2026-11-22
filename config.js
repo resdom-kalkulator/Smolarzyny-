@@ -1,9 +1,8 @@
-// Ustawienia połączenia z bazą Supabase (osobny projekt "smolarzyny").
-// Dopóki oba pola są puste, aplikacja działa w TRYBIE POKAZOWYM:
-// dane zapisują się tylko na tym jednym urządzeniu.
-// Klucz wklejany tutaj to wyłącznie "Publishable key" (albo "anon public").
+// Połączenie z bazą Supabase (projekt "Smolarzyny").
+// Klucz poniżej to "Publishable key" – można go bezpiecznie pokazać,
+// bo bez kodu dostępu baza niczego nie udostępnia.
 // Nigdy nie wklejaj tu klucza "Secret" ani "service_role".
 window.SMOLARZYNY_CONFIG = {
-  supabaseUrl: '',
-  supabaseKey: ''
+  supabaseUrl: 'https://etoakhtazguqgmtqoscm.supabase.co',
+  supabaseKey: 'sb_publishable_D8XhtyGYSKUGVw9cSaR9Qw_xC4sJIC2'
 };
