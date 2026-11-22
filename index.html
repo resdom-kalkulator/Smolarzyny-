@@ -1,0 +1,1034 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projekt Smolarzyny</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F4F4F1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Smolarzyny">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="ikona-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<script src="config.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#F4F4F1;color:#141516;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;-webkit-tap-highlight-color:transparent}
+body.lock{overflow:hidden}
+button{font-family:inherit;cursor:pointer;color:inherit}
+input,textarea{font-family:inherit}
+.wrap{max-width:640px;margin:0 auto;padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+.pad{padding-left:20px;padding-right:20px}
+.top{padding-top:calc(16px + env(safe-area-inset-top))}
+.lbl{font-size:13px;font-weight:600;color:#5E625D;letter-spacing:.02em}
+.sec-title{margin:0;font-size:18px;font-weight:600}
+.muted{color:#5E625D}
+.card{background:#fff;border-radius:18px;border:1px solid #E4E5E1}
+.kv{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px}
+.kv .k{color:#5E625D}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;color:#4F6B54}
+h1{margin:0;font-size:23px;font-weight:700;letter-spacing:.02em}
+.badge{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:11px;background:#EEEFEB;color:#3F433F;font-size:12px;font-weight:500;white-space:nowrap}
+.badge.demo{background:#FFF1D6;color:#6B4A00}
+.hero{height:170px;max-height:320px;border-radius:20px;overflow:hidden;background:#DADBD6}
+.hero img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.dark{background:#24272A;color:#fff;border-radius:22px;padding:22px 20px;display:flex;flex-direction:column;gap:16px}
+.dark .s1{font-size:13px;font-weight:500;color:#C9CCC7}
+.dark .big{font-size:36px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.dark .s2{font-size:13px;color:#AEB9AF}
+.dark .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-top:14px;border-top:1px solid #3A3E42}
+.dark .grid span{display:block}
+.dark .grid .a{font-size:12px;color:#C9CCC7;margin-bottom:4px}
+.dark .grid .b{font-size:16px;font-weight:600}
+.tile{display:flex;flex-direction:column;gap:12px;width:100%;padding:18px;background:#fff;border:1px solid #E4E5E1;border-radius:18px;text-align:left;font-size:15px}
+.tile:active{background:#F8F8F6}
+.tiles{display:grid;gap:12px}
+.q4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.qt{display:flex;flex-direction:column;gap:6px;min-width:0;padding:14px;background:#fff;border:1px solid #E4E5E1;border-radius:18px;text-align:left;font-size:13px}
+.qt:active{background:#F8F8F6}
+.qt .h{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:16px;font-weight:700}
+.qt .n{font-size:12px;color:#5E625D;line-height:1.35}
+.qt .lab{font-size:12px;color:#5E625D;margin-top:4px}
+.qt .sum{font-size:18px;font-weight:700;letter-spacing:-.01em;overflow-wrap:anywhere}
+.qt .ln{display:flex;justify-content:space-between;gap:6px;font-size:12px;color:#5E625D;flex-wrap:wrap}
+.qt .ln b{font-weight:600;color:#141516}
+.qt.all{background:#24272A;border-color:#24272A;color:#fff}
+.qt.all .n,.qt.all .lab,.qt.all .ln{color:#C9CCC7}
+.qt.all .ln b{color:#fff}
+@media (min-width:600px){.hero{height:auto;aspect-ratio:2.4/1}}
+@media (min-width:900px){.wrap{max-width:960px}.q4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.chip{flex:none;height:40px;padding:0 16px;border-radius:20px;border:1px solid #D5D7D3;background:#fff;color:#2E3135;font-size:14px;font-weight:500;white-space:nowrap}
+.chip.on{background:#2E3135;border-color:#2E3135;color:#fff}
+.hscroll{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:0 20px}
+.hscroll::-webkit-scrollbar{display:none}
+.input{width:100%;height:52px;padding:0 14px;border-radius:14px;border:1.5px solid #D5D7D3;background:#fff;font-size:16px;color:#141516;outline:none;-webkit-appearance:none;appearance:none}
+.input:focus{border-color:#4F6B54}
+input[type=date].input{min-width:0;display:block}
+textarea.input{height:88px;padding:12px 14px;resize:vertical;line-height:1.4}
+.cat{min-height:52px;padding:10px 14px;border-radius:14px;border:1.5px solid #D5D7D3;background:#fff;color:#2E3135;font-size:15px;font-weight:500;text-align:left}
+.cat.on{border-color:#4F6B54;background:#EDF2EC;color:#2C4230;font-weight:600}
+.pbtn{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:12px;min-height:84px;border-radius:14px;border:1.5px solid #D5D7D3;background:#fff;color:#2E3135;text-align:left;min-width:0}
+.pbtn.on{border-color:#4F6B54;background:#EDF2EC;color:#2C4230}
+.pbtn .t{font-size:15px;font-weight:600;overflow-wrap:anywhere}
+.pbtn .s{font-size:13px;color:#5E625D}
+.pbtn.on .s{color:#2C4230;font-weight:600}
+.check{width:22px;height:22px;border-radius:7px;border:1.5px solid #B4B8B2;display:flex;align-items:center;justify-content:center;background:#fff;color:#fff}
+.pbtn.on .check{background:#4F6B54;border-color:#4F6B54}
+.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:4px;background:#E7E8E4;border-radius:14px;gap:4px}
+.seg button{height:44px;border:0;border-radius:11px;background:transparent;color:#2E3135;font-size:15px;font-weight:500}
+.seg button.on{background:#fff;color:#141516;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.primary{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:58px;border:0;border-radius:16px;background:#4F6B54;color:#fff;font-size:17px;font-weight:600}
+.primary:active{background:#435C48}
+.primary[disabled]{opacity:.6}
+.ghost{height:44px;padding:0 14px;border-radius:12px;border:1px solid #D5D7D3;background:#fff;color:#2E3135;font-size:14px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.linkbtn{height:44px;padding:0 4px;border:0;background:transparent;color:#3E5843;font-size:14px;font-weight:600}
+.danger{width:100%;height:52px;border-radius:14px;border:1.5px solid #E2C3BD;background:#fff;color:#A33A2B;font-size:16px;font-weight:600}
+.danger.on{background:#A33A2B;border-color:#A33A2B;color:#fff}
+.iconbtn{flex:none;width:44px;height:44px;border-radius:12px;border:1px solid #E4E5E1;background:#fff;display:flex;align-items:center;justify-content:center;color:#141516}
+.list{overflow:hidden;display:flex;flex-direction:column;gap:1px;background:#EEEFEB}
+.row{display:flex;justify-content:space-between;gap:12px;flex:1;min-width:0;padding:14px 6px 14px 16px;border:0;background:#fff;text-align:left}
+.row:active{background:#F8F8F6}
+.trash{flex:none;width:52px;border:0;background:#fff;color:#6B6F6A;display:flex;align-items:center;justify-content:center}
+.trash:active{background:#FBF3F1;color:#A33A2B}
+.ok{color:#3E5843}
+.bad{color:#A33A2B}
+.photo{position:relative;display:flex;align-items:center;gap:12px;min-height:56px;padding:12px 14px;border-radius:14px;border:1.5px dashed #B4B8B2;background:#fff;color:#2E3135;font-size:15px;font-weight:500;cursor:pointer}
+.photo input{position:absolute;opacity:0;width:1px;height:1px}
+.bar{height:6px;border-radius:3px;background:#EEEFEB;overflow:hidden}
+.bar i{display:block;height:100%}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(244,244,241,.96);border-top:1px solid #E4E5E1;padding:12px 20px calc(14px + env(safe-area-inset-bottom))}
+.bottom .in{max-width:600px;margin:0 auto}
+.sheet{position:fixed;inset:0;z-index:20;background:#F4F4F1;display:flex;flex-direction:column}
+.sheet .hd{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(14px + env(safe-area-inset-top)) 20px 14px;border-bottom:1px solid #E4E5E1}
+.sheet .hd h2{margin:0;font-size:21px;font-weight:700}
+.sheet .bd{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.sheet .bd .in{max-width:600px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:22px}
+.sheet .ft{flex:none;border-top:1px solid #E4E5E1;padding:12px 20px calc(14px + env(safe-area-inset-bottom))}
+.sheet .ft .in{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.dim{position:fixed;inset:0;z-index:30;background:rgba(20,21,22,.45);display:flex;align-items:flex-end;justify-content:center}
+.pop{width:100%;max-width:520px;background:#fff;border-radius:22px 22px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:8px;max-height:90vh;overflow-y:auto}
+@media (min-width:700px){.dim{align-items:center}.pop{border-radius:22px}}
+.mi{display:flex;align-items:center;gap:14px;width:100%;min-height:56px;padding:10px 12px;border:0;border-radius:14px;background:#fff;text-align:left;font-size:16px;font-weight:500}
+.mi:active{background:#F4F4F1}
+.mi svg{flex:none;color:#4F6B54}
+.mi small{display:block;font-size:13px;font-weight:400;color:#5E625D;margin-top:2px}
+.warn{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:16px;background:#FFF6E5;border:1px solid #F1DDB0;color:#5C3F00;font-size:14px;line-height:1.4}
+.center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.center .box{width:100%;max-width:420px;display:flex;flex-direction:column;gap:16px}
+.logo{width:72px;height:72px;border-radius:18px;display:block}
+#toast{position:fixed;left:20px;right:20px;bottom:calc(100px + env(safe-area-inset-bottom));z-index:50;max-width:560px;margin:0 auto;padding:14px 16px;border-radius:14px;background:#24272A;color:#fff;font-size:15px;font-weight:500;line-height:1.4;box-shadow:0 6px 20px rgba(0,0,0,.18);opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s;pointer-events:none}
+#toast.show{opacity:1;transform:none}
+.spin{width:28px;height:28px;border-radius:50%;border:3px solid #D5D7D3;border-top-color:#4F6B54;animation:sp 0.9s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.viewer img{display:block;max-width:100%;height:auto;border-radius:12px;background:#fff}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<noscript><p style="padding:20px">Ta aplikacja wymaga włączonej obsługi JavaScript.</p></noscript>
+<div id="main"></div>
+<div id="overlay"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="restoreFile" accept="application/json,.json" class="sr" tabindex="-1" aria-hidden="true">
+<script>
+'use strict';
+/* ================= Ustawienia i pomocnicze ================= */
+var CFG = window.SMOLARZYNY_CONFIG || {};
+var DEMO = !CFG.supabaseUrl || !CFG.supabaseKey;
+var CODE_KEY = 'smolarzyny_kod';
+var VERSION = '1.0';
+
+var LS = {
+  get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+  del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
+};
+
+var CATS = [
+  { id: 'usluga', label: 'Usługa', short: 'Usługa' },
+  { id: 'material', label: 'Materiał lub przedmiot', short: 'Materiał' },
+  { id: 'robocizna', label: 'Robocizna', short: 'Robocizna' },
+  { id: 'oplata', label: 'Opłata urzędowa', short: 'Opłata urzędowa' },
+  { id: 'inne', label: 'Inne', short: 'Inne' }
+];
+// Działki – stała kolejność i numery ewidencyjne. Kwoty w groszach, BRUTTO = netto + VAT.
+var PLOTS0 = [
+  { id: 'd1', name: 'Działka 1', nr: '8121/5', area: 888,  net: 11100000, vat: 2553000, price: 13653000, date: '2026-11-16' },
+  { id: 'd2', name: 'Działka 2', nr: '8121/4', area: 1016, net: 12700000, vat: 2921000, price: 15621000, date: '2026-11-16' },
+  { id: 'd3', name: 'Działka 3', nr: '8121/3', area: 908,  net: 11350000, vat: 2610500, price: 13960500, date: '2026-11-16' }
+];
+// Nazwa i numer ewidencyjny są zawsze takie jak wyżej (nie da się ich zmienić w aplikacji).
+function fixPlots(list) {
+  return PLOTS0.map(function (b) {
+    var x = (list || []).filter(function (p) { return p.id === b.id; })[0] || b;
+    return Object.assign({}, b, { area: x.area != null ? +x.area : b.area, net: x.net != null ? +x.net : null, vat: x.vat != null ? +x.vat : null, price: x.price != null ? +x.price : null, date: x.date || b.date });
+  });
+}
+function area(m2) { return m2 ? new Intl.NumberFormat('pl-PL').format(m2) + ' m²' : '—'; }
+function catLabel(id) { for (var i = 0; i < CATS.length; i++) if (CATS[i].id === id) return CATS[i].label; return 'Inne'; }
+
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+var NF = new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+function fmt(g) { return NF.format((g || 0) / 100); }
+// "1 500,50" / "1500.5" / "1.500,50" -> grosze (liczba całkowita). Zły zapis -> NaN.
+function parseMoney(s) {
+  if (s == null) return NaN;
+  var t = String(s).replace(/[\s zł]/gi, '');
+  if (t.indexOf(',') >= 0 && t.indexOf('.') >= 0) t = t.replace(/\./g, '');
+  t = t.replace(',', '.');
+  if (!/^\d+(\.\d{1,2})?$/.test(t)) return NaN;
+  return Math.round(parseFloat(t) * 100);
+}
+// "16.11.2026", "16.11.26", "16112026", "2026-11-16" -> "2026-11-16"; błędna data -> ''
+function plToIso(str) {
+  var t = String(str || '').trim(), m;
+  if ((m = t.match(/^(\d{4})-(\d{2})-(\d{2})$/))) m = [0, m[3], m[2], m[1]];
+  else if ((m = t.match(/^(\d{2})(\d{2})(\d{4})$/))) {}
+  else m = t.match(/^(\d{1,2})[.\/\-, ]+(\d{1,2})[.\/\-, ]+(\d{2}|\d{4})$/);
+  if (!m) return '';
+  var d = +m[1], mo = +m[2], y = +m[3]; if (y < 100) y += 2000;
+  var dt = new Date(Date.UTC(y, mo - 1, d));
+  if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== mo - 1 || dt.getUTCDate() !== d || y < 2000 || y > 2100) return '';
+  return y + '-' + String(mo).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+}
+function toStr(g) { return (g / 100).toFixed(2).replace('.', ','); }
+function dLabel(iso) { var p = String(iso || '').slice(0, 10).split('-'); return p.length === 3 ? p[2] + '.' + p[1] + '.' + p[0] : iso; }
+function today() { var d = new Date(); var z = function (n) { return String(n).padStart(2, '0'); }; return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate()); }
+function plural(n, one, few, many) {
+  var m10 = n % 10, m100 = n % 100;
+  if (n === 1) return n + ' ' + one;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return n + ' ' + few;
+  return n + ' ' + many;
+}
+function nWyd(n) { return plural(n, 'wydatek', 'wydatki', 'wydatków'); }
+function uid() { if (window.crypto && crypto.randomUUID) return crypto.randomUUID(); return 'x' + Date.now().toString(36) + Math.random().toString(36).slice(2); }
+
+// Podział kwoty (w groszach) na działki. Suma części ZAWSZE równa się kwocie wydatku.
+function alloc(e) {
+  var out = {}, ps = e.plots || [];
+  if (!ps.length) return out;
+  if (e.mode === 'manual' && ps.length > 1) { ps.forEach(function (p) { out[p] = (e.manual && +e.manual[p]) || 0; }); return out; }
+  var base = Math.floor(e.amount / ps.length), rem = e.amount - base * ps.length;
+  ps.forEach(function (p, i) { out[p] = base + (i < rem ? 1 : 0); });
+  return out;
+}
+
+/* ================= Ikony ================= */
+function svg(d, size, sw) { return '<svg width="' + (size || 20) + '" height="' + (size || 20) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (sw || 2) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; }
+var IC = {
+  menu: '<path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/>',
+  back: '<path d="M15 6l-6 6 6 6"/>',
+  chev: '<path d="M9 6l6 6-6 6"/>',
+  plus: '<path d="M12 5v14"/><path d="M5 12h14"/>',
+  close: '<path d="M6 6l12 12"/><path d="M18 6L6 18"/>',
+  trash: '<path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/><path d="M10 11v6"/><path d="M14 11v6"/>',
+  edit: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+  clip: '<path d="M20 11.5l-8 8a5 5 0 01-7-7l8.5-8.5a3.3 3.3 0 014.7 4.7L9.7 17.2a1.7 1.7 0 01-2.4-2.4L15 7"/>',
+  down: '<path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/>',
+  up: '<path d="M12 20V9"/><path d="M7 14l5-5 5 5"/><path d="M5 4h14"/>',
+  refresh: '<path d="M20 11a8 8 0 10-2.3 5.7"/><path d="M20 5v6h-6"/>',
+  sheet: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16"/><path d="M4 15h16"/><path d="M10 3v18"/>',
+  key: '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9"/><path d="M17 6l3 3"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',
+  camera: '<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+  checkm: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  alert: '<path d="M12 4l9 16H3z"/><path d="M12 10v4"/><path d="M12 17v.5"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8v.5"/>'
+};
+
+/* ================= Przechowywanie danych ================= */
+function ApiError(kind, message) { this.kind = kind; this.message = message; }
+
+// Tryb pokazowy: dane tylko w tej przeglądarce.
+var DEMO_KEY = 'smolarzyny_pokaz_v2';
+var LocalAPI = {
+  mem: {},
+  seed: function () { return { plots: fixPlots(PLOTS0), expenses: [] }; },
+  db: function () {
+    var d = null; try { d = JSON.parse(LS.get(DEMO_KEY)); } catch (e) {}
+    if (!d || !d.plots) { d = this.seed(); this.put(d); }
+    return d;
+  },
+  put: function (d) { LS.set(DEMO_KEY, JSON.stringify(d)); },
+  check: function () { return Promise.resolve(true); },
+  load: function () { var d = this.db(); return Promise.resolve({ plots: d.plots, expenses: d.expenses }); },
+  savePlot: function (p) { var d = this.db(); d.plots = d.plots.map(function (x) { return x.id === p.id ? Object.assign({}, x, p) : x; }); this.put(d); return Promise.resolve(true); },
+  saveExpense: function (e) {
+    var d = this.db(), self = this;
+    if (e.docId && this.mem[e.docId]) e.docName = this.mem[e.docId].name;
+    if (!e.docId) e.docName = null;
+    if (!e.id) { e = Object.assign({}, e, { id: uid(), created: new Date().toISOString() }); d.expenses.push(e); }
+    else d.expenses = d.expenses.map(function (x) {
+      if (x.id !== e.id) return x;
+      if (x.docId && x.docId !== e.docId) delete self.mem[x.docId];
+      return Object.assign({}, x, e);
+    });
+    this.put(d); return Promise.resolve({ id: e.id });
+  },
+  deleteExpense: function (id) { var d = this.db(); d.expenses = d.expenses.filter(function (x) { return x.id !== id; }); this.put(d); return Promise.resolve(true); },
+  saveDoc: function (doc) { var id = uid(); this.mem[id] = doc; return Promise.resolve(id); },
+  getDoc: function (id) { var d = this.mem[id]; return d ? Promise.resolve(d) : Promise.reject(new ApiError('demo', 'W trybie pokazowym zdjęcia są pamiętane tylko do odświeżenia strony. Po podłączeniu bazy będą zapisywane na stałe.')); },
+  restore: function (data) { var d = this.db(); d.plots = fixPlots(data.plots); d.expenses = data.expenses.map(function (e) { return Object.assign({}, e, { id: uid() }); }); this.put(d); return Promise.resolve(true); },
+  reset: function () { LS.del(DEMO_KEY); this.mem = {}; return Promise.resolve(true); }
+};
+
+// Tryb właściwy: baza Supabase. Każde zapytanie wymaga kodu dostępu.
+var RemoteAPI = {
+  code: function () { return LS.get(CODE_KEY) || ''; },
+  rpc: function (fn, args) {
+    var key = CFG.supabaseKey, h = { 'Content-Type': 'application/json', 'apikey': key };
+    if (/^eyJ/.test(key)) h.Authorization = 'Bearer ' + key;
+    return fetch(String(CFG.supabaseUrl).replace(/\/+$/, '') + '/rest/v1/rpc/' + fn, { method: 'POST', headers: h, body: JSON.stringify(args), cache: 'no-store' })
+      .catch(function () { throw new ApiError('offline', 'Brak połączenia z bazą danych. Sprawdź internet. Jeśli internet działa, baza mogła zostać uśpiona po 7 dniach bez używania (patrz instrukcja).'); })
+      .then(function (res) {
+        return res.text().then(function (txt) {
+          var body = null; try { body = txt ? JSON.parse(txt) : null; } catch (e) {}
+          if (res.ok) return body;
+          var msg = (body && (body.message || body.msg || body.error)) || txt || '';
+          if (/ZLY_KOD/.test(msg)) throw new ApiError('code', 'Nieprawidłowy kod dostępu.');
+          if (res.status === 404 || /could not find the function|PGRST202/i.test(msg)) throw new ApiError('setup', 'Baza danych nie jest jeszcze przygotowana (brakuje skryptu setup.sql).');
+          if (res.status === 401 || /api key|apikey|JWT/i.test(msg)) throw new ApiError('key', 'Nieprawidłowy klucz w pliku config.js.');
+          if (res.status >= 500 && !body) throw new ApiError('offline', 'Baza danych nie odpowiada. Mogła zostać uśpiona po 7 dniach bez używania (patrz instrukcja).');
+          throw new ApiError('server', msg || ('Błąd serwera (' + res.status + ').'));
+        });
+      });
+  },
+  check: function (code) { return this.rpc('sm_sprawdz', { p_kod: code }); },
+  load: function () { return this.rpc('sm_pobierz', { p_kod: this.code() }); },
+  savePlot: function (p) { return this.rpc('sm_zapisz_dzialke', { p_kod: this.code(), p_dzialka: p }); },
+  saveExpense: function (e) { return this.rpc('sm_zapisz_wydatek', { p_kod: this.code(), p_wydatek: e }); },
+  deleteExpense: function (id) { return this.rpc('sm_usun_wydatek', { p_kod: this.code(), p_id: id }); },
+  saveDoc: function (doc) { return this.rpc('sm_zapisz_dokument', { p_kod: this.code(), p_nazwa: doc.name, p_typ: doc.type, p_dane: doc.data }); },
+  getDoc: function (id) { return this.rpc('sm_pobierz_dokument', { p_kod: this.code(), p_id: id }); },
+  restore: function (data) { return this.rpc('sm_przywroc', { p_kod: this.code(), p_dane: data }); }
+};
+var API = DEMO ? LocalAPI : RemoteAPI;
+
+/* ================= Stan aplikacji ================= */
+var S = {
+  phase: 'loading', errorMsg: '', codeError: '',
+  plots: [], expenses: [], loadedAt: 0,
+  screen: 'home', plotId: null,
+  q: '', fcat: 'all', from: '', to: '', pendingDel: null,
+  overlay: null, // 'form' | 'plot' | 'menu' | 'confirm' | 'viewer'
+  form: null, plotForm: null, confirm: null, viewer: null, busy: false
+};
+
+var toastT;
+function toast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('show'); }, 3200);
+}
+function plotName(id) { for (var i = 0; i < S.plots.length; i++) if (S.plots[i].id === id) return S.plots[i].name; return id; }
+
+/* ================= Obliczenia ================= */
+function vm() {
+  var withA = S.expenses.map(function (e) { return { e: e, a: alloc(e) }; });
+  var plots = S.plots.map(function (p) {
+    var mine = withA.filter(function (x) { return x.a[p.id] != null; });
+    var other = mine.reduce(function (t, x) { return t + x.a[p.id]; }, 0);
+    return Object.assign({}, p, { count: mine.length, other: other, total: (p.net || 0) + other });
+  });
+  var land = plots.reduce(function (t, p) { return t + (p.net || 0); }, 0);
+  var otherAll = S.expenses.reduce(function (t, e) { return t + e.amount; }, 0);
+  var anyPrice = S.plots.some(function (p) { return p.net != null; });
+  var scope = S.screen === 'plot' ? S.plotId : null;
+  var pool = scope ? withA.filter(function (x) { return x.a[scope] != null; }) : withA;
+  var amtFor = function (x) { return scope ? (x.a[scope] || 0) : x.e.amount; };
+  return { withA: withA, plots: plots, land: land, otherAll: otherAll, anyPrice: anyPrice, scope: scope, pool: pool, amtFor: amtFor };
+}
+function filtered(m) {
+  var q = S.q.trim().toLowerCase();
+  return m.pool.filter(function (x) {
+    if (q && (x.e.name + ' ' + (x.e.notes || '')).toLowerCase().indexOf(q) < 0) return false;
+    if (S.fcat !== 'all' && x.e.cat !== S.fcat) return false;
+    if (S.from && x.e.date < S.from) return false;
+    if (S.to && x.e.date > S.to) return false;
+    return true;
+  }).sort(function (A, B) { return B.e.date.localeCompare(A.e.date) || String(B.e.created || '').localeCompare(String(A.e.created || '')); });
+}
+
+/* ================= Widoki ================= */
+function render() {
+  var main = document.getElementById('main');
+  if (S.phase === 'loading') main.innerHTML = '<div class="center"><div class="box" style="align-items:center"><div class="spin" role="img" aria-label="Wczytywanie"></div><span class="muted">Wczytywanie danych…</span></div></div>';
+  else if (S.phase === 'code') main.innerHTML = codeView();
+  else if (S.phase === 'error') main.innerHTML = errorView();
+  else main.innerHTML = mainView();
+  renderOverlay();
+}
+
+function codeView() {
+  return '<div class="center"><form class="box" data-form="code" autocomplete="off">' +
+    '<img class="logo" src="ikona-192.png" alt="">' +
+    '<div><div class="eyebrow">INWESTYCJA · 3 DOMY</div><h1>PROJEKT SMOLARZYNY</h1></div>' +
+    '<p style="margin:0;font-size:16px;line-height:1.45">Wpisz kod dostępu. Robisz to tylko raz na tym urządzeniu, potem aplikacja otwiera się od razu.</p>' +
+    '<label style="display:flex;flex-direction:column;gap:8px"><span class="lbl">Kod dostępu</span>' +
+    '<input class="input" id="codeIn" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="off" required></label>' +
+    (S.codeError ? '<div role="alert" class="bad" style="font-size:14px;font-weight:600">' + esc(S.codeError) + '</div>' : '') +
+    '<button class="primary" type="submit"' + (S.busy ? ' disabled' : '') + '>' + (S.busy ? 'Sprawdzam…' : 'Otwórz aplikację') + '</button>' +
+    '</form></div>';
+}
+
+function errorView() {
+  return '<div class="center"><div class="box">' +
+    '<img class="logo" src="ikona-192.png" alt="">' +
+    '<h1 style="font-size:21px">Nie udało się wczytać danych</h1>' +
+    '<p style="margin:0;font-size:16px;line-height:1.45">' + esc(S.errorMsg) + '</p>' +
+    '<p class="muted" style="margin:0;font-size:14px;line-height:1.45">Twoje dane są bezpieczne w bazie. Ten komunikat oznacza tylko brak połączenia.</p>' +
+    '<button class="primary" data-act="retry">' + svg(IC.refresh, 22) + 'Spróbuj ponownie</button>' +
+    '</div></div>';
+}
+
+function backupDue() {
+  if (!S.expenses.length) return false;
+  var last = +LS.get('smolarzyny_kopia') || +LS.get('smolarzyny_start') || Date.now();
+  return Date.now() - last > 30 * 864e5;
+}
+
+function mainView() {
+  var m = vm(), h = '';
+  h += '<div class="wrap">';
+  if (!m.scope) {
+    h += '<header class="pad top" style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding-bottom:12px">' +
+      '<div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="eyebrow">INWESTYCJA · 3 DOMY</span><h1>PROJEKT SMOLARZYNY</h1>' +
+      (DEMO ? '<span><span class="badge demo">Tryb pokazowy · dane tylko na tym urządzeniu</span></span>' : '') + '</div>' +
+      '<button class="iconbtn" data-act="menu" aria-label="Menu">' + svg(IC.menu) + '</button></header>';
+    h += '<div class="pad"><div class="hero"><img src="dom.jpg" alt="Wizualizacja domu: kamienna elewacja, ciemny dach, drewniany taras"></div></div>';
+    if (backupDue()) h += '<div class="pad" style="padding-top:14px"><div class="warn">' + svg(IC.alert, 20) + '<div style="flex:1">Od ponad miesiąca nie było kopii zapasowej na tym urządzeniu. <button class="linkbtn" style="height:auto;padding:0;color:#5C3F00;text-decoration:underline" data-act="backup">Zrób kopię teraz</button></div></div></div>';
+    var areaAll = m.plots.reduce(function (t, p) { return t + (p.area || 0); }, 0);
+    h += '<section class="pad" style="padding-top:20px;display:flex;flex-direction:column;gap:12px"><h2 class="sec-title">Działki i koszty (netto)</h2><div class="q4">';
+    m.plots.forEach(function (p) {
+      h += '<button class="qt" data-act="plot" data-id="' + esc(p.id) + '">' +
+        '<span class="h"><span>' + esc(p.name) + '</span><span class="muted">' + svg(IC.chev, 18) + '</span></span>' +
+        '<span class="n">nr ' + esc(p.nr) + ' · ' + area(p.area) + '</span>' +
+        '<span class="lab">Dom z działką razem</span><span class="sum">' + fmt(p.total) + '</span>' +
+        '<span class="ln"><span>Zakup działki</span><b>' + (p.net == null ? '—' : fmt(p.net)) + '</b></span>' +
+        '<span class="ln"><span>Pozostałe</span><b>' + fmt(p.other) + '</b></span></button>';
+    });
+    h += '<div class="qt all" role="group" aria-label="Cała inwestycja">' +
+      '<span class="h"><span>Cała inwestycja</span></span>' +
+      '<span class="n">3 działki · ' + area(areaAll) + '</span>' +
+      '<span class="lab">Łączne koszty</span><span class="sum">' + fmt(m.land + m.otherAll) + '</span>' +
+      '<span class="ln"><span>Zakup działek</span><b>' + fmt(m.land) + '</b></span>' +
+      '<span class="ln"><span>Pozostałe</span><b>' + fmt(m.otherAll) + '</b></span></div>';
+    h += '</div><p class="muted" style="margin:0;font-size:13px">Wszystkie kwoty netto (bez VAT). Wydatek wspólny dla kilku działek liczony jest w całej inwestycji tylko raz.</p>';
+    h += '</div></section>';
+  } else {
+    var cur = m.plots.filter(function (p) { return p.id === m.scope; })[0] || m.plots[0];
+    h += '<header class="pad top" style="display:flex;align-items:center;gap:12px;padding-bottom:8px">' +
+      '<button class="iconbtn" data-act="home" aria-label="Wróć do pulpitu">' + svg(IC.back) + '</button>' +
+      '<div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0"><span class="eyebrow">PROJEKT SMOLARZYNY</span><h1>' + esc(cur.name) + '</h1></div>' +
+      '</header>';
+    h += '<div class="pad" style="padding-top:8px"><div class="dark"><div style="display:flex;flex-direction:column;gap:6px">' +
+      '<span class="s1">Dom z działką razem (netto)</span><span class="big" style="font-size:34px">' + fmt(cur.total) + '</span>' +
+      '<span class="s2">Nr ewidencyjny ' + esc(cur.nr) + ' · ' + area(cur.area) + '</span></div>' +
+      '<div class="grid"><div><span class="a">Zakup działki</span><span class="b">' + (cur.net == null ? '—' : fmt(cur.net)) + '</span></div>' +
+      '<div><span class="a">Pozostałe koszty</span><span class="b">' + fmt(cur.other) + '</span></div></div></div></div>';
+    h += '<section class="pad" style="padding-top:24px;display:flex;flex-direction:column;gap:12px"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><h2 class="sec-title">Zakup działki</h2>' +
+      '<button class="ghost" data-act="editplot">' + svg(IC.edit, 18) + 'Zmień cenę</button></div><div class="card" style="padding:8px 16px">' +
+      [['Numer ewidencyjny', esc(cur.nr)], ['Powierzchnia', area(cur.area) + (cur.area ? ' (' + String((cur.area / 100).toFixed(2)).replace('.', ',') + ' ara)' : '')], ['Data faktury', dLabel(cur.date)],
+       ['<b>Cena zakupu netto</b>', '<b>' + (cur.net == null ? '—' : fmt(cur.net)) + '</b>']]
+        .map(function (r) { return '<div class="kv" style="padding:8px 0"><span class="k">' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('') + '</div></section>';
+  }
+
+  // Podsumowanie wg rodzaju
+  var curPlot = m.scope ? S.plots.filter(function (p) { return p.id === m.scope; })[0] : null;
+  var sums = [{ label: m.scope ? 'Zakup działki (netto)' : 'Zakup działek (netto)', v: m.scope ? ((curPlot && curPlot.net) || 0) : m.land, land: true, known: m.scope ? (curPlot && curPlot.net != null) : m.anyPrice }];
+  CATS.forEach(function (c) { sums.push({ label: c.label, v: m.pool.filter(function (x) { return x.e.cat === c.id; }).reduce(function (t, x) { return t + m.amtFor(x); }, 0) }); });
+  var max = Math.max.apply(null, [1].concat(sums.map(function (x) { return x.v; })));
+  h += '<section class="pad" style="padding-top:24px;display:flex;flex-direction:column;gap:12px">' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><h2 class="sec-title">Podsumowanie (netto)</h2>' +
+    '<button class="ghost" data-act="excel">' + svg(IC.down, 18) + 'Excel</button></div><div class="card" style="padding:4px 16px">';
+  sums.forEach(function (x) {
+    var unk = x.land && !x.known;
+    h += '<div style="display:flex;flex-direction:column;gap:6px;padding:10px 0"><div class="kv"><span>' + esc(x.label) + '</span><span class="' + (unk ? 'muted' : '') + '" style="font-weight:600">' + (unk ? 'do uzupełnienia' : fmt(x.v)) + '</span></div>' +
+      '<div class="bar"><i style="width:' + Math.round(x.v / max * 100) + '%;background:' + (x.land ? '#2E3135' : '#4F6B54') + '"></i></div></div>';
+  });
+  h += '</div></section>';
+
+  // Historia
+  h += '<section class="pad" style="padding-top:24px;display:flex;flex-direction:column;gap:12px">' +
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><h2 class="sec-title">' + (m.scope ? 'Koszty tej działki' : 'Historia wydatków') + '</h2><span class="muted" style="font-size:13px" id="hist-count"></span></div>' +
+    '<div style="position:relative"><span class="muted" style="position:absolute;left:14px;top:16px">' + svg(IC.search) + '</span>' +
+    '<input class="input" type="text" enterkeyhint="search" placeholder="Szukaj (nazwa lub uwagi)" aria-label="Szukaj wydatku" value="' + esc(S.q) + '" data-in="q" style="padding-left:44px"></div>' +
+    '<div class="hscroll" role="group" aria-label="Filtruj według rodzaju" id="chips"></div>' +
+    '<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">' +
+    '<label style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="lbl">Od dnia</span><input class="input" type="text" inputmode="numeric" placeholder="dd.mm.rrrr" value="' + esc(S.fromTxt || '') + '" data-dt="from" style="height:46px"></label>' +
+    '<label style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="lbl">Do dnia</span><input class="input" type="text" inputmode="numeric" placeholder="dd.mm.rrrr" value="' + esc(S.toTxt || '') + '" data-dt="to" style="height:46px"></label></div>' +
+    '<div id="clear"></div><div class="card list" id="hist"></div><div id="hist-sum"></div></section>';
+  h += '</div>';
+  h += '<div class="bottom"><div class="in"><button class="primary" data-act="new">' + svg(IC.plus, 22, 2.2) + 'Dodaj wydatek</button></div></div>';
+  setTimeout(updateHist, 0);
+  return h;
+}
+
+function updateHist() {
+  var hist = document.getElementById('hist'); if (!hist) return;
+  var m = vm(), list = filtered(m), h = '';
+  list.forEach(function (x) {
+    var e = x.e, a = x.a, n = e.plots.length, names = e.plots.map(plotName), sub;
+    if (m.scope) sub = n > 1 ? 'Część wspólnego wydatku ' + fmt(e.amount) + ' · ' + n + ' działki, ' + (e.mode === 'manual' ? 'różne kwoty' : 'po równo') : 'Wydatek tylko tej działki';
+    else sub = names.join(', ') + (n > 1 ? (e.mode === 'manual' ? ' · różne kwoty' : ' · po ' + (e.amount % n ? 'ok. ' : '') + fmt(a[e.plots[0]])) : '');
+    h += '<div style="display:flex;flex-direction:column;background:#fff"><div style="display:flex;align-items:stretch">' +
+      '<button class="row" data-act="edit" data-id="' + esc(e.id) + '" aria-label="Edytuj: ' + esc(e.name) + '">' +
+      '<span style="display:flex;flex-direction:column;gap:6px;min-width:0">' +
+      '<span style="font-size:15px;font-weight:600;overflow-wrap:anywhere">' + esc(e.name) + (e.docId ? ' <span class="muted" title="Ma dołączony dokument">' + svg(IC.clip, 15) + '</span>' : '') + '</span>' +
+      '<span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="badge">' + esc(catLabel(e.cat)) + '</span><span class="muted" style="font-size:13px">' + dLabel(e.date) + '</span></span>' +
+      '<span class="muted" style="font-size:13px;line-height:1.35">' + esc(sub) + '</span></span>' +
+      '<span style="font-size:15px;font-weight:700;white-space:nowrap">' + fmt(m.scope ? a[m.scope] : e.amount) + '</span></button>' +
+      '<button class="trash" data-act="askdel" data-id="' + esc(e.id) + '" aria-label="Usuń wydatek: ' + esc(e.name) + '">' + svg(IC.trash) + '</button></div>';
+    if (S.pendingDel === e.id) {
+      var txt = n > 1 ? 'Usunąć cały wydatek „' + e.name + '” (' + fmt(e.amount) + ')? Zniknie z działek: ' + names.join(', ') + '.' : 'Usunąć wydatek „' + e.name + '” (' + fmt(e.amount) + ')?';
+      h += '<div role="alert" style="display:flex;flex-direction:column;gap:10px;padding:12px 16px 14px;background:#FBF3F1;border-top:1px solid #F0DCD7">' +
+        '<span style="font-size:14px;font-weight:600;line-height:1.4;color:#7A2A1F">' + esc(txt) + '</span>' +
+        '<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px"><button class="ghost" data-act="canceldel">Anuluj</button><button class="danger on" style="height:44px" data-act="dodel" data-id="' + esc(e.id) + '">Usuń</button></div></div>';
+    }
+    h += '</div>';
+  });
+  if (!list.length) h = '<div class="muted" style="padding:24px 16px;background:#fff;text-align:center;font-size:15px">' + (S.expenses.length ? 'Brak wydatków dla wybranych filtrów.' : 'Nie ma jeszcze żadnych wydatków. Dodaj pierwszy przyciskiem na dole.') + '</div>';
+  hist.innerHTML = h;
+  document.getElementById('hist-count').textContent = nWyd(list.length);
+  var sum = list.reduce(function (t, x) { return t + m.amtFor(x); }, 0);
+  document.getElementById('hist-sum').innerHTML = list.length ? '<div class="kv" style="padding:0 4px"><span class="k">Suma widocznych wydatków</span><span style="font-weight:700">' + fmt(sum) + '</span></div>' : '';
+  var chips = [{ id: 'all', short: 'Wszystkie' }].concat(CATS);
+  document.getElementById('chips').innerHTML = chips.map(function (c) { return '<button class="chip' + (S.fcat === c.id ? ' on' : '') + '" aria-pressed="' + (S.fcat === c.id) + '" data-act="fcat" data-id="' + c.id + '">' + esc(c.short) + '</button>'; }).join('');
+  var has = S.q || S.fcat !== 'all' || S.from || S.to;
+  document.getElementById('clear').innerHTML = has ? '<button class="linkbtn" data-act="clearf">Wyczyść filtry</button>' : '';
+}
+
+/* ---------- Nakładki (formularze, menu) ---------- */
+function renderOverlay() {
+  var o = document.getElementById('overlay'), h = '';
+  if (S.overlay === 'form') h = formView();
+  else if (S.overlay === 'plot') h = plotFormView();
+  else if (S.overlay === 'menu') h = menuView();
+  else if (S.overlay === 'confirm') h = confirmView();
+  else if (S.overlay === 'viewer') h = viewerView();
+  o.innerHTML = h;
+  document.body.classList.toggle('lock', !!S.overlay);
+  if (S.overlay === 'form') updateForm(true);
+}
+
+function blankForm(preset) {
+  var fp = {}; if (preset) fp[preset] = true;
+  return { id: null, date: today(), dateTxt: dLabel(today()), cat: '', name: '', amount: '', plots: fp, mode: 'equal', manual: {}, notes: '', docId: null, docName: null, file: null, error: '', confirmDel: false, saving: false };
+}
+
+function formView() {
+  var F = S.form;
+  return '<div class="sheet" role="dialog" aria-modal="true" aria-label="' + (F.id ? 'Edytuj wydatek' : 'Nowy wydatek') + '">' +
+    '<div class="hd"><h2>' + (F.id ? 'Edytuj wydatek' : 'Nowy wydatek') + '</h2><button class="iconbtn" data-act="close" aria-label="Zamknij formularz">' + svg(IC.close) + '</button></div>' +
+    '<div class="bd"><div class="in">' +
+    '<label style="display:flex;flex-direction:column;gap:8px"><span class="lbl">Data (dzień.miesiąc.rok)</span><span style="display:flex;gap:8px"><input class="input" type="text" inputmode="numeric" placeholder="dd.mm.rrrr, np. 16.11.2026" value="' + esc(F.dateTxt) + '" data-f="dateTxt" style="flex:1"><button class="ghost" style="height:52px;flex:none" data-act="ftoday" type="button">Dziś</button></span></label>' +
+    '<div style="display:flex;flex-direction:column;gap:8px"><span class="lbl" id="cat-lbl">Rodzaj wydatku</span><div role="group" aria-labelledby="cat-lbl" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px" id="f-cats"></div></div>' +
+    '<label style="display:flex;flex-direction:column;gap:8px"><span class="lbl">Nazwa wydatku</span><input class="input" type="text" placeholder="np. Mapy geodezyjne" value="' + esc(F.name) + '" data-f="name" maxlength="200"></label>' +
+    '<label style="display:flex;flex-direction:column;gap:8px"><span class="lbl">Kwota netto (PLN, bez VAT)</span><span style="position:relative;display:block">' +
+    '<input class="input" type="text" inputmode="decimal" placeholder="0,00" value="' + esc(F.amount) + '" data-f="amount" style="padding-right:44px;font-size:20px;font-weight:600">' +
+    '<span class="muted" style="position:absolute;right:16px;top:15px;font-size:16px;font-weight:500">zł</span></span></label>' +
+    '<div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;align-items:center"><span class="lbl" id="plot-lbl">Których działek dotyczy?</span><button class="linkbtn" data-act="fall">Wszystkie trzy</button></div>' +
+    '<div role="group" aria-labelledby="plot-lbl" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px" id="f-plots"></div></div>' +
+    '<div style="display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:16px;background:#fff;border:1px solid #E4E5E1"><span class="lbl">Podział kosztu</span><div id="f-split" style="display:flex;flex-direction:column;gap:10px"></div></div>' +
+    '<label style="display:flex;flex-direction:column;gap:8px"><span class="lbl">Uwagi (opcjonalnie)</span><textarea class="input" placeholder="np. faktura nr…, wykonawca, termin" data-f="notes" maxlength="2000">' + esc(F.notes) + '</textarea></label>' +
+    '<div style="display:flex;flex-direction:column;gap:8px"><span class="lbl">Zdjęcie dokumentu (opcjonalnie)</span><div id="f-doc" style="display:flex;flex-direction:column;gap:8px"></div></div>' +
+    (F.id ? '<button class="danger' + (F.confirmDel ? ' on' : '') + '" data-act="fdel" id="f-del">' + (F.confirmDel ? 'Na pewno? Dotknij jeszcze raz, aby usunąć' : 'Usuń wydatek') + '</button>' : '') +
+    '</div></div>' +
+    '<div class="ft"><div class="in"><div id="f-err"></div><button class="primary" data-act="save" id="f-save">Zapisz wydatek</button></div></div></div>';
+}
+
+function formCalc() {
+  var F = S.form, amt = parseMoney(F.amount), amtOk = amt > 0;
+  var sel = S.plots.filter(function (p) { return F.plots[p.id]; }).map(function (p) { return p.id; });
+  var n = sel.length, manualOn = n > 1 && F.mode === 'manual', shares = {};
+  if (amtOk && n) {
+    if (manualOn) sel.forEach(function (id) { var r = F.manual[id]; var v = r === '' || r == null ? 0 : parseMoney(r); shares[id] = isNaN(v) ? null : v; });
+    else shares = alloc({ amount: amt, plots: sel, mode: 'equal' });
+  }
+  return { amt: amt, amtOk: amtOk, sel: sel, n: n, manualOn: manualOn, shares: shares };
+}
+
+function updateForm(full) {
+  var F = S.form, c = formCalc();
+  if (full) {
+    document.getElementById('f-cats').innerHTML = CATS.map(function (k) { return '<button class="cat' + (F.cat === k.id ? ' on' : '') + '" aria-pressed="' + (F.cat === k.id) + '" data-act="fcatpick" data-id="' + k.id + '">' + esc(k.label) + '</button>'; }).join('');
+    var sp = '';
+    if (c.n > 1) sp += '<div class="seg" role="group" aria-label="Sposób podziału"><button class="' + (c.manualOn ? '' : 'on') + '" aria-pressed="' + !c.manualOn + '" data-act="mode" data-id="equal">Po równo</button><button class="' + (c.manualOn ? 'on' : '') + '" aria-pressed="' + c.manualOn + '" data-act="mode" data-id="manual">Różne kwoty</button></div>';
+    if (c.manualOn) {
+      sp += '<div style="display:flex;flex-direction:column;gap:8px">';
+      c.sel.forEach(function (id) {
+        sp += '<label style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font-size:15px;font-weight:500;min-width:0;overflow-wrap:anywhere">' + esc(plotName(id)) + '</span>' +
+          '<span style="position:relative;display:block;width:170px;flex:none"><input class="input" type="text" inputmode="decimal" placeholder="0,00" value="' + esc(F.manual[id] || '') + '" data-m="' + esc(id) + '" style="height:48px;padding-right:40px;text-align:right">' +
+          '<span class="muted" style="position:absolute;right:14px;top:14px;font-size:15px">zł</span></span></label>';
+      });
+      sp += '</div>';
+    }
+    sp += '<span id="f-stat" style="font-size:15px;line-height:1.45"></span>';
+    document.getElementById('f-split').innerHTML = sp;
+    var d = '';
+    if (F.file) d += '<div class="photo" style="cursor:default;border-style:solid">' + svg(IC.clip, 22) + '<span style="flex:1;min-width:0;overflow-wrap:anywhere">' + esc(F.file.name) + '<br><span class="muted" style="font-size:13px;font-weight:400">zostanie zapisany razem z wydatkiem</span></span><button class="linkbtn" data-act="fdocrm">Usuń</button></div>';
+    else if (F.docId) d += '<div class="photo" style="cursor:default;border-style:solid">' + svg(IC.clip, 22) + '<span style="flex:1;min-width:0;overflow-wrap:anywhere">' + esc(F.docName || 'Dokument') + '</span><button class="linkbtn" data-act="fdocview">Pokaż</button><button class="linkbtn" data-act="fdocrm">Usuń</button></div>';
+    d += '<label class="photo"><input type="file" accept="image/*,application/pdf" data-f="file">' + '<span style="color:#4F6B54">' + svg(IC.camera, 22) + '</span><span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span>' + (F.file || F.docId ? 'Zmień zdjęcie lub plik' : 'Dodaj zdjęcie lub plik') + '</span><span class="muted" style="font-size:13px;font-weight:400">Faktura, paragon lub inny dokument (zdjęcie albo PDF)</span></span></label>';
+    document.getElementById('f-doc').innerHTML = d;
+  }
+  // działki z kwotami
+  document.getElementById('f-plots').innerHTML = S.plots.map(function (p) {
+    var on = !!F.plots[p.id];
+    return '<button class="pbtn' + (on ? ' on' : '') + '" aria-pressed="' + on + '" data-act="fplot" data-id="' + esc(p.id) + '"><span class="check">' + (on ? svg(IC.checkm, 14, 3) : '') + '</span>' +
+      '<span class="t">' + esc(p.name) + '</span><span class="s">' + (on ? (c.shares[p.id] != null ? fmt(c.shares[p.id]) : '—') : 'nie dotyczy') + '</span></button>';
+  }).join('');
+  // opis podziału / status
+  var st = document.getElementById('f-stat'), txt = '', cls = '';
+  if (c.manualOn) {
+    if (!c.amtOk) { txt = 'Najpierw wpisz kwotę wydatku.'; cls = 'muted'; }
+    else {
+      var sum = 0, bad = false;
+      c.sel.forEach(function (id) { var r = F.manual[id]; var v = r === '' || r == null ? 0 : parseMoney(r); if (isNaN(v)) bad = true; else sum += v; });
+      var diff = c.amt - sum;
+      if (bad) { txt = 'Popraw kwoty – użyj cyfr, np. 1200,50.'; cls = 'bad'; }
+      else if (diff > 0) { txt = 'Pozostało do rozdzielenia: ' + fmt(diff); cls = 'bad'; }
+      else if (diff < 0) { txt = 'Przekroczono kwotę o ' + fmt(-diff); cls = 'bad'; }
+      else { txt = 'Podział zgadza się z kwotą wydatku.'; cls = 'ok'; }
+    }
+  } else if (c.n === 0) txt = 'Zaznacz jedną, dwie lub wszystkie trzy działki.';
+  else if (c.n === 1) txt = 'Cała kwota' + (c.amtOk ? ' (' + fmt(c.amt) + ')' : '') + ' zostanie przypisana do: ' + plotName(c.sel[0]) + '.';
+  else {
+    var rem = c.amtOk && c.amt % c.n;
+    txt = c.amtOk ? 'Każda z ' + c.n + ' działek otrzyma ' + (rem ? 'ok. ' : '') + fmt(Math.floor(c.amt / c.n)) + (rem ? ' (grosze reszty trafiają do pierwszej działki).' : '.') : 'Wpisz kwotę – aplikacja podzieli ją po równo.';
+  }
+  st.className = cls; st.style.fontWeight = cls && cls !== 'muted' ? '600' : '400'; st.textContent = txt;
+  document.getElementById('f-err').innerHTML = F.error ? '<div role="alert" class="bad" style="font-size:14px;font-weight:600;line-height:1.4">' + esc(F.error) + '</div>' : '';
+  var sv = document.getElementById('f-save'); sv.disabled = F.saving; sv.textContent = F.saving ? 'Zapisywanie…' : 'Zapisz wydatek';
+}
+
+function plotFormView() {
+  var P = S.plotForm;
+  return '<div class="sheet" role="dialog" aria-modal="true" aria-label="Cena zakupu działki">' +
+    '<div class="hd"><h2>Cena zakupu – ' + esc(P.name) + '</h2><button class="iconbtn" data-act="close" aria-label="Zamknij">' + svg(IC.close) + '</button></div>' +
+    '<div class="bd"><div class="in">' +
+    '<p class="muted" style="margin:0;font-size:14px;line-height:1.45">Numer ewidencyjny ' + esc(P.nr) + ' jest stały i nie można go zmienić.</p>' +
+    '<label style="display:flex;flex-direction:column;gap:8px"><span class="lbl">Cena zakupu netto (PLN, bez VAT)</span><span style="position:relative;display:block"><input class="input" type="text" inputmode="decimal" value="' + esc(P.net) + '" data-p="net" style="padding-right:44px;font-size:20px;font-weight:600"><span class="muted" style="position:absolute;right:16px;top:15px;font-size:16px">zł</span></span></label>' +
+    '<label style="display:flex;flex-direction:column;gap:8px"><span class="lbl">Powierzchnia (m²)</span><input class="input" type="text" inputmode="numeric" value="' + esc(P.area) + '" data-p="area"></label>' +
+    '</div></div>' +
+    '<div class="ft"><div class="in"><div id="p-err">' + (P.error ? '<div role="alert" class="bad" style="font-size:14px;font-weight:600">' + esc(P.error) + '</div>' : '') + '</div><button class="primary" data-act="psave"' + (P.saving ? ' disabled' : '') + '>' + (P.saving ? 'Zapisywanie…' : 'Zapisz cenę zakupu') + '</button></div></div></div>';
+}
+
+function menuView() {
+  var mi = function (act, icon, t, s) { return '<button class="mi" data-act="' + act + '">' + svg(icon, 22) + '<span>' + t + (s ? '<small>' + s + '</small>' : '') + '</span></button>'; };
+  var h = '<div class="dim" data-act="close"><div class="pop" role="dialog" aria-modal="true" aria-label="Menu" data-stop="1">' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px 6px"><strong style="font-size:18px">Menu</strong><button class="iconbtn" data-act="close" aria-label="Zamknij menu">' + svg(IC.close) + '</button></div>';
+  h += mi('refresh', IC.refresh, 'Odśwież dane', DEMO ? '' : 'Pokaże wydatki dodane przez drugą osobę');
+  h += mi('excel', IC.sheet, 'Eksport do Excela', 'Plik .xlsx: wydatki i podsumowanie działek');
+  h += mi('backup', IC.down, 'Kopia zapasowa', 'Plik .json ze wszystkimi danymi');
+  h += mi('restore', IC.up, 'Przywróć z kopii zapasowej', 'Zastępuje obecne dane danymi z pliku');
+  if (DEMO) h += mi('demoreset', IC.trash, 'Wyczyść dane pokazowe', 'Przywraca 3 przykładowe wydatki');
+  else h += mi('forget', IC.key, 'Zapomnij kod na tym urządzeniu', 'Przy następnym otwarciu trzeba wpisać go ponownie');
+  var lastB = +LS.get('smolarzyny_kopia');
+  h += '<p class="muted" style="margin:8px 4px 0;font-size:13px;line-height:1.45">' + (DEMO ? 'Tryb pokazowy: dane zapisują się tylko w tej przeglądarce. Po podłączeniu bazy będą wspólne dla obu osób.' : 'Dane są zapisywane w prywatnej bazie i widoczne tylko z kodem dostępu.') +
+    '<br>Ostatnia kopia zapasowa na tym urządzeniu: ' + (lastB ? dLabel(new Date(lastB).toISOString()) : 'jeszcze nie było') + ' · wersja ' + VERSION + '</p>';
+  return h + '</div></div>';
+}
+
+function confirmView() {
+  var C = S.confirm;
+  return '<div class="dim"><div class="pop" role="alertdialog" aria-modal="true" aria-label="' + esc(C.title) + '">' +
+    '<strong style="font-size:18px">' + esc(C.title) + '</strong><p style="margin:0 0 8px;font-size:15px;line-height:1.45">' + esc(C.text) + '</p>' +
+    '<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px"><button class="ghost" style="height:52px" data-act="confirmcancel">Anuluj</button><button class="danger on" data-act="confirmok">' + esc(C.ok) + '</button></div></div></div>';
+}
+
+function viewerView() {
+  var V = S.viewer, b = '';
+  if (V.loading) b = '<div style="display:flex;justify-content:center;padding:40px"><div class="spin" role="img" aria-label="Wczytywanie"></div></div>';
+  else if (V.error) b = '<p class="bad" style="font-weight:600">' + esc(V.error) + '</p>';
+  else if (/^image\//.test(V.type)) b = '<div class="viewer"><img src="data:' + esc(V.type) + ';base64,' + V.data + '" alt="' + esc(V.name) + '"></div>';
+  else b = '<p style="margin:0;font-size:15px">Plik PDF: ' + esc(V.name) + '</p>';
+  return '<div class="sheet" role="dialog" aria-modal="true" aria-label="Dokument"><div class="hd"><h2 style="font-size:18px;overflow-wrap:anywhere">' + esc(V.name || 'Dokument') + '</h2><button class="iconbtn" data-act="viewerclose" aria-label="Zamknij">' + svg(IC.close) + '</button></div>' +
+    '<div class="bd"><div class="in">' + b + '</div></div>' +
+    (V.data ? '<div class="ft"><div class="in"><button class="primary" data-act="docsave">' + svg(IC.down, 22) + 'Zapisz lub udostępnij plik</button></div></div>' : '') + '</div>';
+}
+
+/* ================= Działania ================= */
+function closeOverlay() { S.overlay = null; S.form = null; S.plotForm = null; S.confirm = null; S.viewer = null; renderOverlay(); }
+
+function refresh(first) {
+  if (first) { S.phase = 'loading'; render(); }
+  return API.load().then(function (d) {
+    S.plots = fixPlots(d.plots); S.expenses = (d.expenses || []).map(function (e) { e.amount = +e.amount; e.manual = e.manual || {}; return e; });
+    S.loadedAt = Date.now();
+    if (!LS.get('smolarzyny_start')) LS.set('smolarzyny_start', String(Date.now()));
+    var was = S.phase; S.phase = 'ready';
+    if (was !== 'ready') render(); else { document.getElementById('main').innerHTML = mainView(); }
+    return true;
+  }).catch(function (err) {
+    if (err.kind === 'code') { LS.del(CODE_KEY); S.phase = 'code'; S.codeError = 'Kod dostępu jest nieprawidłowy albo został zmieniony. Wpisz go ponownie.'; closeOverlay(); render(); }
+    else if (S.phase !== 'ready') { S.phase = 'error'; S.errorMsg = err.message || String(err); render(); }
+    else toast(err.message || 'Nie udało się odświeżyć danych.');
+    return false;
+  });
+}
+
+function saveExpense() {
+  var F = S.form; if (F.saving) return;
+  var err = function (m) { F.error = m; updateForm(false); };
+  var amount = parseMoney(F.amount);
+  var plots = S.plots.filter(function (p) { return F.plots[p.id]; }).map(function (p) { return p.id; });
+  F.date = plToIso(F.dateTxt);
+  if (!F.date) return err('Wpisz datę w formacie dzień.miesiąc.rok, np. 16.11.2026.');
+  if (!F.cat) return err('Wybierz rodzaj wydatku.');
+  if (!F.name.trim()) return err('Wpisz nazwę wydatku.');
+  if (!(amount > 0)) return err('Podaj poprawną kwotę, np. 1500 lub 1500,50.');
+  if (!plots.length) return err('Zaznacz co najmniej jedną działkę.');
+  var mode = plots.length > 1 ? F.mode : 'equal', manual = {};
+  if (mode === 'manual') {
+    var sum = 0;
+    for (var i = 0; i < plots.length; i++) {
+      var raw = F.manual[plots[i]], v = raw === '' || raw == null ? 0 : parseMoney(raw);
+      if (isNaN(v)) return err('Popraw kwotę dla: ' + plotName(plots[i]) + '.');
+      manual[plots[i]] = v; sum += v;
+    }
+    if (sum !== amount) return err('Suma podziału (' + fmt(sum) + ') musi być równa kwocie wydatku (' + fmt(amount) + ').');
+  }
+  F.saving = true; F.error = ''; updateForm(false);
+  var editing = !!F.id;
+  var docStep = F.file ? API.saveDoc(F.file) : Promise.resolve(F.docId);
+  docStep.then(function (docId) {
+    return API.saveExpense({ id: F.id, date: F.date, cat: F.cat, name: F.name.trim(), amount: amount, plots: plots, mode: mode, manual: manual, notes: F.notes.trim(), docId: docId || null });
+  }).then(function () {
+    closeOverlay();
+    return refresh(false);
+  }).then(function () {
+    toast(editing ? 'Zapisano zmiany. Koszty działek przeliczone.' : (plots.length === 1 ? 'Zapisano. Cała kwota przypisana do: ' + plotName(plots[0]) + '.' : 'Zapisano. Kwota rozdzielona na ' + plots.length + ' działki.'));
+  }).catch(function (e) {
+    if (S.form) { S.form.saving = false; err(e.message || 'Nie udało się zapisać. Spróbuj jeszcze raz.'); }
+    else toast(e.message || 'Nie udało się zapisać.');
+  });
+}
+
+function deleteExpense(id) {
+  S.pendingDel = null;
+  API.deleteExpense(id).then(function () { closeOverlay(); return refresh(false); })
+    .then(function () { toast('Usunięto wydatek. Koszty działek przeliczone.'); })
+    .catch(function (e) { toast(e.message || 'Nie udało się usunąć.'); });
+}
+
+function savePlot() {
+  var P = S.plotForm; if (P.saving) return;
+  var net = parseMoney(P.net), vat = Math.round(net * 0.23), ar = String(P.area).replace(/\s/g, '');
+  if (isNaN(net)) { P.error = 'Podaj poprawną cenę netto, np. 111000 lub 111 000,00.'; renderOverlay(); return; }
+  if (!/^\d{1,7}$/.test(ar)) { P.error = 'Podaj powierzchnię w pełnych metrach, np. 888.'; renderOverlay(); return; }
+  var old = S.plots.filter(function (x) { return x.id === P.id; })[0], form = P;
+  S.overlay = 'confirm';
+  S.confirm = { title: 'Zmienić cenę zakupu?', text: P.name + ' (nr ' + P.nr + '): cena netto zmieni się z ' + (old.net == null ? '—' : fmt(old.net)) + ' na ' + fmt(net) + '. Wszystkie podsumowania zostaną przeliczone.', ok: 'Tak, zmień',
+    cancel: function () { S.overlay = 'plot'; S.plotForm = form; S.confirm = null; renderOverlay(); },
+    run: function () {
+      S.confirm = null; S.overlay = 'plot'; S.plotForm = form; form.saving = true; form.error = ''; renderOverlay();
+      API.savePlot({ id: form.id, area: +ar, net: net, vat: vat, price: net + vat })
+        .then(function () { closeOverlay(); return refresh(false); })
+        .then(function () { toast('Zapisano nową cenę zakupu. Podsumowania przeliczone.'); })
+        .catch(function (e) { if (S.plotForm) { S.plotForm.saving = false; S.plotForm.error = e.message; renderOverlay(); } });
+    } };
+  renderOverlay();
+}
+
+function readFileB64(file) {
+  return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(String(r.result).split(',')[1]); }; r.onerror = function () { rej(new Error('Nie udało się odczytać pliku.')); }; r.readAsDataURL(file); });
+}
+function prepareFile(file) {
+  if (file.type === 'application/pdf' || /\.pdf$/i.test(file.name)) {
+    if (file.size > 3 * 1024 * 1024) return Promise.reject(new Error('Plik PDF jest za duży (maks. 3 MB). Zrób zdjęcie dokumentu zamiast PDF.'));
+    return readFileB64(file).then(function (d) { return { name: file.name, type: 'application/pdf', data: d }; });
+  }
+  return new Promise(function (res, rej) {
+    var url = URL.createObjectURL(file), img = new Image();
+    img.onload = function () {
+      var max = 1600, w = img.naturalWidth, h = img.naturalHeight, s = Math.min(1, max / Math.max(w, h));
+      w = Math.round(w * s); h = Math.round(h * s);
+      var c = document.createElement('canvas'); c.width = w; c.height = h;
+      var ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); ctx.drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      res({ name: (file.name || 'zdjecie').replace(/\.[^.]+$/, '') + '.jpg', type: 'image/jpeg', data: c.toDataURL('image/jpeg', 0.72).split(',')[1] });
+    };
+    img.onerror = function () { URL.revokeObjectURL(url); rej(new Error('Nie udało się odczytać zdjęcia. Spróbuj innego pliku.')); };
+    img.src = url;
+  });
+}
+
+function b64ToBytes(b64) { var s = atob(b64), u = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u; }
+
+// Zapis pliku: na telefonie okno „Udostępnij”, na komputerze zwykłe pobranie.
+function deliverFile(name, mime, data) {
+  var blob = new Blob([data], { type: mime });
+  var touch = window.matchMedia && matchMedia('(pointer: coarse)').matches;
+  try {
+    var file = new File([blob], name, { type: mime });
+    if (touch && navigator.canShare && navigator.canShare({ files: [file] })) {
+      return navigator.share({ files: [file], title: name }).then(function () { return true; }, function (e) { return e && e.name === 'AbortError' ? false : download(); });
+    }
+  } catch (e) {}
+  return Promise.resolve(download());
+  function download() {
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+    return true;
+  }
+}
+
+function stamp() { var d = today(); return d; }
+
+function doBackup() {
+  var data = { aplikacja: 'Projekt Smolarzyny', wersja: 1, utworzono: new Date().toISOString(), plots: S.plots, expenses: S.expenses };
+  deliverFile('smolarzyny-kopia-' + stamp() + '.json', 'application/json', JSON.stringify(data, null, 1)).then(function (ok) {
+    if (ok) { LS.set('smolarzyny_kopia', String(Date.now())); toast('Kopia zapasowa gotowa. Zapisz plik w bezpiecznym miejscu.'); if (S.phase === 'ready' && !S.overlay) document.getElementById('main').innerHTML = mainView(); }
+  });
+}
+
+function startRestore(file) {
+  var r = new FileReader();
+  r.onload = function () {
+    var d; try { d = JSON.parse(r.result); } catch (e) { toast('To nie jest prawidłowy plik kopii zapasowej.'); return; }
+    if (!d || !Array.isArray(d.plots) || !Array.isArray(d.expenses)) { toast('To nie jest plik kopii zapasowej Projektu Smolarzyny.'); return; }
+    S.overlay = 'confirm';
+    S.confirm = { title: 'Przywrócić dane z kopii?', text: 'Plik z dnia ' + dLabel(d.utworzono) + ' zawiera ' + nWyd(d.expenses.length) + '. Obecne wydatki zostaną zastąpione danymi z pliku' + (DEMO ? '.' : ' – także u drugiej osoby.'), ok: 'Przywróć', run: function () {
+      closeOverlay();
+      API.restore({ plots: d.plots, expenses: d.expenses }).then(function () { return refresh(false); }).then(function () { toast('Przywrócono dane z kopii zapasowej.'); }).catch(function (e) { toast(e.message || 'Nie udało się przywrócić danych.'); });
+    } };
+    renderOverlay();
+  };
+  r.readAsText(file);
+}
+
+/* ---------- Eksport do Excela (.xlsx) bez zewnętrznych bibliotek ---------- */
+var CRC_T = (function () { var t = new Uint32Array(256); for (var n = 0; n < 256; n++) { var c = n; for (var k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(u) { var c = 0xFFFFFFFF; for (var i = 0; i < u.length; i++) c = CRC_T[(c ^ u[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function makeZip(files) {
+  var enc = new TextEncoder(), chunks = [], central = [], offset = 0;
+  files.forEach(function (f) {
+    var name = enc.encode(f.name), data = typeof f.data === 'string' ? enc.encode(f.data) : f.data, crc = crc32(data);
+    var lh = new DataView(new ArrayBuffer(30));
+    lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(8, 0, true);
+    lh.setUint16(10, 0, true); lh.setUint16(12, 33, true); lh.setUint32(14, crc, true); lh.setUint32(18, data.length, true); lh.setUint32(22, data.length, true);
+    lh.setUint16(26, name.length, true); lh.setUint16(28, 0, true);
+    chunks.push(new Uint8Array(lh.buffer), name, data);
+    var ch = new DataView(new ArrayBuffer(46));
+    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true); ch.setUint16(10, 0, true);
+    ch.setUint16(12, 0, true); ch.setUint16(14, 33, true); ch.setUint32(16, crc, true); ch.setUint32(20, data.length, true); ch.setUint32(24, data.length, true);
+    ch.setUint16(28, name.length, true); ch.setUint32(42, offset, true);
+    central.push(new Uint8Array(ch.buffer), name);
+    offset += 30 + name.length + data.length;
+  });
+  var cdSize = central.reduce(function (t, c) { return t + c.length; }, 0);
+  var end = new DataView(new ArrayBuffer(22));
+  end.setUint32(0, 0x06054b50, true); end.setUint16(8, files.length, true); end.setUint16(10, files.length, true); end.setUint32(12, cdSize, true); end.setUint32(16, offset, true);
+  var all = chunks.concat(central, [new Uint8Array(end.buffer)]), len = all.reduce(function (t, c) { return t + c.length; }, 0), out = new Uint8Array(len), p = 0;
+  all.forEach(function (c) { out.set(c, p); p += c.length; });
+  return out;
+}
+function xe(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, ''); }
+function colName(i) { var s = ''; i++; while (i > 0) { var m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; }
+// komórka: tekst | {n: liczba, s: styl} | {d:'2026-01-31'} ; style: 1 kwota, 2 data, 3 pogrubienie, 4 pogrubiona kwota
+function sheetXml(rows, widths) {
+  var x = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><cols>';
+  widths.forEach(function (w, i) { x += '<col min="' + (i + 1) + '" max="' + (i + 1) + '" width="' + w + '" customWidth="1"/>'; });
+  x += '</cols><sheetData>';
+  rows.forEach(function (r, ri) {
+    x += '<row r="' + (ri + 1) + '">';
+    r.forEach(function (c, ci) {
+      if (c == null || c === '') return;
+      var ref = colName(ci) + (ri + 1);
+      if (typeof c === 'object' && c.n != null) x += '<c r="' + ref + '" s="' + (c.s || 1) + '"><v>' + c.n + '</v></c>';
+      else if (typeof c === 'object' && c.d) { var p = c.d.split('-'); var serial = (Date.UTC(+p[0], +p[1] - 1, +p[2]) - Date.UTC(1899, 11, 30)) / 864e5; x += '<c r="' + ref + '" s="2"><v>' + serial + '</v></c>'; }
+      else { var t = typeof c === 'object' ? c.t : c, s = typeof c === 'object' ? (c.s || 0) : 0; x += '<c r="' + ref + '" t="inlineStr"' + (s ? ' s="' + s + '"' : '') + '><is><t xml:space="preserve">' + xe(t) + '</t></is></c>'; }
+    });
+    x += '</row>';
+  });
+  return x + '</sheetData></worksheet>';
+}
+function buildXlsx(sheets) {
+  var styles = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+    '<numFmts count="2"><numFmt numFmtId="164" formatCode="#,##0.00\\ &quot;zł&quot;"/><numFmt numFmtId="165" formatCode="dd\\.mm\\.yyyy"/></numFmts>' +
+    '<fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts>' +
+    '<fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills>' +
+    '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>' +
+    '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>' +
+    '<cellXfs count="5"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>' +
+    '<xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>' +
+    '<xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>' +
+    '<xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/>' +
+    '<xf numFmtId="164" fontId="1" fillId="0" borderId="0" xfId="0" applyNumberFormat="1" applyFont="1"/></cellXfs>' +
+    '<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
+  var files = [
+    { name: '[Content_Types].xml', data: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>' +
+      sheets.map(function (s, i) { return '<Override PartName="/xl/worksheets/sheet' + (i + 1) + '.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'; }).join('') + '</Types>' },
+    { name: '_rels/.rels', data: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>' },
+    { name: 'xl/workbook.xml', data: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>' +
+      sheets.map(function (s, i) { return '<sheet name="' + xe(s.name) + '" sheetId="' + (i + 1) + '" r:id="rId' + (i + 1) + '"/>'; }).join('') + '</sheets></workbook>' },
+    { name: 'xl/_rels/workbook.xml.rels', data: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+      sheets.map(function (s, i) { return '<Relationship Id="rId' + (i + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet' + (i + 1) + '.xml"/>'; }).join('') +
+      '<Relationship Id="rId' + (sheets.length + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>' },
+    { name: 'xl/styles.xml', data: styles }
+  ];
+  sheets.forEach(function (s, i) { files.push({ name: 'xl/worksheets/sheet' + (i + 1) + '.xml', data: sheetXml(s.rows, s.widths) }); });
+  return makeZip(files);
+}
+function excelData() {
+  var plots = S.plots, m = vm(), zl = function (g) { return { n: (g / 100).toFixed(2), s: 1 }; }, bz = function (g) { return { n: (g / 100).toFixed(2), s: 4 }; }, b = function (t) { return { t: t, s: 3 }; };
+  var head = [b('Data'), b('Nazwa'), b('Rodzaj'), b('Kwota netto')].concat(plots.map(function (p) { return b(p.name + ' (' + p.nr + ')'); }), [b('Podział'), b('Uwagi'), b('Dokument')]);
+  var rows = [head], tot = 0, totP = {};
+  plots.forEach(function (p) { totP[p.id] = 0; });
+  S.expenses.slice().sort(function (A, B) { return A.date.localeCompare(B.date) || String(A.created || '').localeCompare(String(B.created || '')); }).forEach(function (e) {
+    var a = alloc(e); tot += e.amount;
+    rows.push([{ d: e.date }, e.name, catLabel(e.cat), zl(e.amount)].concat(plots.map(function (p) { if (a[p.id] == null) return ''; totP[p.id] += a[p.id]; return zl(a[p.id]); }),
+      [e.plots.length === 1 ? 'jedna działka' : (e.mode === 'manual' ? 'różne kwoty' : 'po równo'), e.notes || '', e.docId ? 'tak' : '']));
+  });
+  rows.push([b('RAZEM'), '', '', bz(tot)].concat(plots.map(function (p) { return bz(totP[p.id]); })));
+  var sumRows = [[b('Pozycja (kwoty netto, bez VAT)')].concat(plots.map(function (p) { return b(p.name + ' (' + p.nr + ')'); }), [b('Cała inwestycja')])];
+  var sumOf = function (k) { return plots.reduce(function (t, p) { return t + (p[k] || 0); }, 0); };
+  sumRows.push(['Numer ewidencyjny'].concat(plots.map(function (p) { return p.nr; }), ['']));
+  sumRows.push(['Powierzchnia (m²)'].concat(plots.map(function (p) { return { n: p.area || 0, s: 0 }; }), [{ n: sumOf('area'), s: 0 }]));
+  sumRows.push(['Data faktury zakupu'].concat(plots.map(function (p) { return { d: p.date }; }), ['']));
+  sumRows.push([b('Cena zakupu netto')].concat(plots.map(function (p) { return p.net == null ? '' : bz(p.net); }), [bz(m.land)]));
+  CATS.forEach(function (c) {
+    var per = plots.map(function (p) { return m.withA.filter(function (x) { return x.e.cat === c.id && x.a[p.id] != null; }).reduce(function (t, x) { return t + x.a[p.id]; }, 0); });
+    var all = S.expenses.filter(function (e) { return e.cat === c.id; }).reduce(function (t, e) { return t + e.amount; }, 0);
+    sumRows.push([c.label].concat(per.map(zl), [zl(all)]));
+  });
+  sumRows.push([b('Pozostałe koszty razem')].concat(m.plots.map(function (p) { return bz(p.other); }), [bz(m.otherAll)]));
+  sumRows.push([b('Dom z działką razem (netto)')].concat(m.plots.map(function (p) { return bz(p.total); }), [bz(m.land + m.otherAll)]));
+  sumRows.push([]);
+  sumRows.push(['Stan na dzień: ' + dLabel(today()) + '. Wspólne wydatki są liczone w „Cała inwestycja” tylko raz.']);
+  return [{ name: 'Wydatki', rows: rows, widths: [12, 34, 22, 16].concat(plots.map(function () { return 15; }), [14, 40, 10]) },
+          { name: 'Podsumowanie', rows: sumRows, widths: [26].concat(plots.map(function () { return 18; }), [18]) }];
+}
+function doExcel() {
+  var bytes = buildXlsx(excelData());
+  deliverFile('smolarzyny-' + stamp() + '.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', bytes);
+}
+
+function openDoc(id, name) {
+  S.overlay = 'viewer'; S.viewer = { loading: true, name: name, back: S.form ? { form: S.form } : null }; renderOverlay();
+  API.getDoc(id).then(function (d) { if (S.overlay !== 'viewer') return; S.viewer = Object.assign(S.viewer, { loading: false, name: d.name, type: d.type, data: d.data }); renderOverlay(); })
+    .catch(function (e) { if (S.overlay !== 'viewer') return; S.viewer.loading = false; S.viewer.error = e.message; renderOverlay(); });
+}
+
+/* ================= Obsługa kliknięć i pól ================= */
+document.addEventListener('click', function (ev) {
+  var el = ev.target.closest('[data-act]'); if (!el) return;
+  var act = el.getAttribute('data-act'), id = el.getAttribute('data-id');
+  if (act === 'close' && el.classList.contains('dim') && ev.target.closest('[data-stop]')) return; // klik wewnątrz menu
+  var F = S.form;
+  switch (act) {
+    case 'retry': refresh(true); break;
+    case 'menu': S.overlay = 'menu'; renderOverlay(); break;
+    case 'close': closeOverlay(); break;
+    case 'plot': S.screen = 'plot'; S.plotId = id; S.q = ''; S.fcat = 'all'; S.from = ''; S.to = ''; S.fromTxt = ''; S.toTxt = ''; S.pendingDel = null; render(); window.scrollTo(0, 0); break;
+    case 'home': S.screen = 'home'; S.plotId = null; S.q = ''; S.fcat = 'all'; S.from = ''; S.to = ''; S.fromTxt = ''; S.toTxt = ''; S.pendingDel = null; render(); window.scrollTo(0, 0); break;
+    case 'editplot':
+      var p = S.plots.filter(function (x) { return x.id === S.plotId; })[0];
+      S.plotForm = { id: p.id, name: p.name, nr: p.nr, net: p.net == null ? '' : toStr(p.net), area: p.area == null ? '' : String(p.area), error: '', saving: false };
+      S.overlay = 'plot'; renderOverlay(); break;
+    case 'psave': savePlot(); break;
+    case 'fcat': S.fcat = id; S.pendingDel = null; updateHist(); break;
+    case 'clearf': S.q = ''; S.fcat = 'all'; S.from = ''; S.to = ''; S.fromTxt = ''; S.toTxt = ''; document.getElementById('main').innerHTML = mainView(); break;
+    case 'askdel': S.pendingDel = S.pendingDel === id ? null : id; updateHist(); break;
+    case 'canceldel': S.pendingDel = null; updateHist(); break;
+    case 'dodel': deleteExpense(id); break;
+    case 'new': S.form = blankForm(S.screen === 'plot' ? S.plotId : null); S.overlay = 'form'; renderOverlay(); break;
+    case 'edit':
+      var e = S.expenses.filter(function (x) { return x.id === id; })[0]; if (!e) return;
+      var fp = {}, fm = {}; e.plots.forEach(function (k) { fp[k] = true; });
+      Object.keys(e.manual || {}).forEach(function (k) { fm[k] = toStr(+e.manual[k]); });
+      S.form = { id: e.id, date: e.date, dateTxt: dLabel(e.date), cat: e.cat, name: e.name, amount: toStr(e.amount), plots: fp, mode: e.mode, manual: fm, notes: e.notes || '', docId: e.docId, docName: e.docName, file: null, error: '', confirmDel: false, saving: false };
+      S.overlay = 'form'; renderOverlay(); break;
+    case 'fcatpick': F.cat = id; F.error = ''; updateForm(true); break;
+    case 'fplot':
+      F.plots[id] = !F.plots[id];
+      if (!F.plots[id]) delete F.manual[id]; else if (F.mode === 'manual' && F.manual[id] == null) F.manual[id] = '';
+      F.error = ''; updateForm(true); break;
+    case 'fall': S.plots.forEach(function (x) { F.plots[x.id] = true; if (F.mode === 'manual' && F.manual[x.id] == null) F.manual[x.id] = ''; }); F.error = ''; updateForm(true); break;
+    case 'mode':
+      if (id === 'manual') {
+        var c = formCalc(); F.manual = {};
+        if (c.amtOk) { var a = alloc({ amount: c.amt, plots: c.sel, mode: 'equal' }); c.sel.forEach(function (k) { F.manual[k] = toStr(a[k]); }); }
+        else c.sel.forEach(function (k) { F.manual[k] = ''; });
+      }
+      F.mode = id; F.error = ''; updateForm(true); break;
+    case 'fdocrm': if (F.file) F.file = null; else { F.docId = null; F.docName = null; } updateForm(true); break;
+    case 'fdocview': openDoc(F.docId, F.docName); break;
+    case 'viewerclose':
+      var back = S.viewer && S.viewer.back; S.viewer = null;
+      if (back) { S.overlay = 'form'; S.form = back.form; } else S.overlay = null;
+      renderOverlay(); break;
+    case 'docsave': var V = S.viewer; deliverFile(V.name || 'dokument', V.type, b64ToBytes(V.data)); break;
+    case 'fdel':
+      if (!F.confirmDel) { F.confirmDel = true; var d = document.getElementById('f-del'); d.classList.add('on'); d.textContent = 'Na pewno? Dotknij jeszcze raz, aby usunąć'; }
+      else deleteExpense(F.id);
+      break;
+    case 'save': saveExpense(); break;
+    case 'ftoday': F.dateTxt = dLabel(today()); document.querySelector('[data-f=dateTxt]').value = F.dateTxt; F.error = ''; updateForm(false); break;
+    case 'refresh': closeOverlay(); refresh(false).then(function (ok) { if (ok) toast('Dane są aktualne.'); }); break;
+    case 'excel': closeOverlay(); doExcel(); break;
+    case 'backup': closeOverlay(); doBackup(); break;
+    case 'restore': closeOverlay(); var rf = document.getElementById('restoreFile'); rf.value = ''; rf.click(); break;
+    case 'demoreset':
+      S.overlay = 'confirm'; S.confirm = { title: 'Wyczyścić dane pokazowe?', text: 'Wszystko, co wpisano w trybie pokazowym, zostanie usunięte i wrócą 3 przykładowe wydatki.', ok: 'Wyczyść', run: function () { closeOverlay(); LocalAPI.reset().then(function () { return refresh(false); }).then(function () { toast('Przywrócono dane pokazowe.'); }); } };
+      renderOverlay(); break;
+    case 'forget':
+      S.overlay = 'confirm'; S.confirm = { title: 'Zapomnieć kod na tym urządzeniu?', text: 'Dane w bazie zostają bez zmian. Przy następnym otwarciu trzeba będzie wpisać kod dostępu ponownie.', ok: 'Zapomnij', run: function () { closeOverlay(); LS.del(CODE_KEY); S.phase = 'code'; S.codeError = ''; render(); } };
+      renderOverlay(); break;
+    case 'confirmok': S.confirm.run(); break;
+    case 'confirmcancel': if (S.confirm && S.confirm.cancel) S.confirm.cancel(); else closeOverlay(); break;
+  }
+});
+
+document.addEventListener('input', function (ev) {
+  var t = ev.target;
+  if (t.hasAttribute('data-dt')) { var kk = t.getAttribute('data-dt'), iso = plToIso(t.value); S[kk + 'Txt'] = t.value;
+    if (iso || !t.value.trim()) { S[kk] = iso; updateHist(); } return; }
+  if (t.hasAttribute('data-in')) { var k = t.getAttribute('data-in'); S[k] = t.value; S.pendingDel = null; updateHist(); return; }
+  var F = S.form;
+  if (F && t.hasAttribute('data-f') && t.type !== 'file') { F[t.getAttribute('data-f')] = t.value; F.error = ''; if (t.getAttribute('data-f') === 'amount') updateForm(false); else if (F.error === '') document.getElementById('f-err').innerHTML = ''; return; }
+  if (F && t.hasAttribute('data-m')) { F.manual[t.getAttribute('data-m')] = t.value; F.error = ''; updateForm(false); return; }
+  if (S.plotForm && t.hasAttribute('data-p')) {
+    var P = S.plotForm, k = t.getAttribute('data-p'); P[k] = t.value;
+  }
+});
+document.addEventListener('change', function (ev) {
+  var t = ev.target;
+  if (t.hasAttribute('data-in')) { S[t.getAttribute('data-in')] = t.value; updateHist(); return; }
+  if (t.hasAttribute('data-dt')) { var kk = t.getAttribute('data-dt'), iso = plToIso(t.value); S[kk] = iso; if (iso) { S[kk + 'Txt'] = dLabel(iso); t.value = S[kk + 'Txt']; } else if (t.value.trim()) toast('Nie rozpoznano daty. Wpisz np. 16.11.2026.'); updateHist(); return; }
+  if (t.id === 'restoreFile' && t.files && t.files[0]) { startRestore(t.files[0]); return; }
+  if (S.form && t.getAttribute('data-f') === 'file' && t.files && t.files[0]) {
+    var F = S.form;
+    prepareFile(t.files[0]).then(function (doc) { if (S.form !== F) return; F.file = doc; F.error = ''; updateForm(true); })
+      .catch(function (e) { if (S.form !== F) return; F.error = e.message; updateForm(true); });
+    return;
+  }
+});
+document.addEventListener('submit', function (ev) {
+  if (ev.target.getAttribute('data-form') !== 'code') return;
+  ev.preventDefault();
+  var code = document.getElementById('codeIn').value.trim(); if (!code || S.busy) return;
+  S.busy = true; S.codeError = ''; render();
+  RemoteAPI.check(code).then(function () { LS.set(CODE_KEY, code); S.busy = false; return refresh(true); })
+    .catch(function (e) { S.busy = false; S.codeError = e.message || 'Nie udało się sprawdzić kodu.'; render(); var i = document.getElementById('codeIn'); if (i) i.value = code; });
+});
+document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && S.overlay && S.overlay !== 'confirm') closeOverlay(); });
+// Po powrocie do aplikacji pobierz najnowsze dane (np. wpisy drugiej osoby).
+document.addEventListener('visibilitychange', function () {
+  if (document.visibilityState === 'visible' && S.phase === 'ready' && !S.overlay && Date.now() - S.loadedAt > 30000) refresh(false);
+});
+
+/* ================= Start ================= */
+(function start() {
+  var m = location.hash.match(/kod=([^&]+)/);
+  if (m && !DEMO) { LS.set(CODE_KEY, decodeURIComponent(m[1])); try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+  if (!DEMO && !RemoteAPI.code()) { S.phase = 'code'; render(); return; }
+  refresh(true);
+})();
+</script>
+</body>
+</html>
